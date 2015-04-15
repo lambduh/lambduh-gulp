@@ -1,0 +1,36 @@
+{
+  "name": "lambduh-gulp",
+  "version": "0.1.0",
+  "description": "Adds zip and upload gulp tasks for a streamlined AWS Lambda workflow",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.1.23",
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-install": "^0.4.0",
+    "gulp-util": "^3.0.4",
+    "gulp-zip": "^3.0.2",
+    "run-sequence": "^1.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lambduh/lambduh-gulp.git"
+  },
+  "keywords": [
+    "gulp",
+    "lambda",
+    "aws",
+    "zip",
+    "upload"
+  ],
+  "author": "Russell Matney <russell.matney@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lambduh/lambduh-gulp/issues"
+  },
+  "homepage": "https://github.com/lambduh/lambduh-gulp"
+}
