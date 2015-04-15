@@ -48,7 +48,7 @@ module.exports = function(gulp) {
 
   gulp.task('upload', function(callback) {
     try {
-      var config = require("./lambda-config.js");
+      var config = require(process.cwd() + "/lambda-config.js");
     } catch(err) {
       gutil.log("lambduh-gulp upload requires a ./lambda-config.js file to return a js object");
       throw err;
