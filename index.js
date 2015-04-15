@@ -70,10 +70,31 @@ module.exports = function(gulp) {
     return fs.readFile('./dist.zip', function(err, zip) {
       params.Code = { ZipFile: zip };
       lambda.createFunction(params, function(err, data) {
-        if (err) {
-          //check for error code, if function exists, try to upload
+        if (err.statusCode == 409) {//function already exists
           console.log(err);
-          callback(err)
+          lambda.updateFunctionConfiguration(params, function(err, data){
+            if(err) {
+              var warning = 'Fail while Updating Function Configuration'
+              gutil.log(warning);
+              //TODO: think about trying to update the code anyway
+              callback(err);
+            } else {
+              console.log("Successful function configuration update.");
+              lambda.updateFunctionCode({
+                FunctionName: params.FunctionName,
+                ZipFile: params.Code.ZipFile
+              }, function(err, data) {
+                if(err) {
+                  var warning = 'Fail while Updating Function Code'
+                  gutil.log(warning);
+                  callback(err);
+                } else {
+                  console.log("Successful function upload");
+                  callback();
+                }
+              })
+            }
+          })
         } else if(err) {
           var warning = 'Fail while Creating Lambda Function'
           gutil.log(warning);
