@@ -58,24 +58,30 @@ module.exports = function(gulp) {
     var lambda = new AWS.Lambda();
 
     var params = {
-      FunctionName: config.functionName,
-      Handler: config.handler,
-      Mode: "event",
-      Role: config.role,
-      Runtime: "nodejs",
-      Timeout: config.timeout
+      FunctionName: config.FunctionName,
+      Description: config.Description,
+      Handler: config.Handler,
+      Role: config.Role,
+      Runtime: config.Runtime,
+      MemorySize: config.MemorySize,
+      Timeout: config.Timeout
     };
 
     return fs.readFile('./dist.zip', function(err, data) {
-      params['FunctionZip'] = data;
-      lambda.uploadFunction(params, function(err, data) {
+      params.Code.ZipFile = data;
+      lambda.createFunction(params, function(err, data) {
         if (err) {
-          var warning = 'Package upload failed. '
-          warning += 'Check your iam:PassRole permissions.'
+          //check for error code, if function exists, try to upload
+          console.log(err);
+          callback(err)
+        } else if(err) {
+          var warning = 'Fail while Creating Lambda Function'
           gutil.log(warning);
           callback(err)
+        } else {
+          console.log('Successfully created new lambda function');
+          callback()
         }
-        callback()
       });
     });
   });
