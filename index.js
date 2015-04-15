@@ -47,36 +47,37 @@ module.exports = function(gulp) {
   });
 
   gulp.task('upload', function(callback) {
-    var config = require("./lambda-config.js");
-
-    if (!config) {
+    try {
+      var config = require("./lambda-config.js");
+    } catch(err) {
       gutil.log("lambduh-gulp upload requires a ./lambda-config.js file to return a js object");
-    } else {
-      AWS.config.region = config.region;
-      var lambda = new AWS.Lambda();
-
-      var params = {
-        FunctionName: config.functionName,
-        Handler: config.handler,
-        Mode: "event",
-        Role: config.role,
-        Runtime: "nodejs",
-        Timeout: config.timeout
-      };
-
-      return fs.readFile('./dist.zip', function(err, data) {
-        params['FunctionZip'] = data;
-        lambda.uploadFunction(params, function(err, data) {
-          if (err) {
-            var warning = 'Package upload failed. '
-            warning += 'Check your iam:PassRole permissions.'
-            gutil.log(warning);
-            callback(err)
-          }
-          callback()
-        });
-      });
+      throw err;
     }
+
+    AWS.config.region = config.region;
+    var lambda = new AWS.Lambda();
+
+    var params = {
+      FunctionName: config.functionName,
+      Handler: config.handler,
+      Mode: "event",
+      Role: config.role,
+      Runtime: "nodejs",
+      Timeout: config.timeout
+    };
+
+    return fs.readFile('./dist.zip', function(err, data) {
+      params['FunctionZip'] = data;
+      lambda.uploadFunction(params, function(err, data) {
+        if (err) {
+          var warning = 'Package upload failed. '
+          warning += 'Check your iam:PassRole permissions.'
+          gutil.log(warning);
+          callback(err)
+        }
+        callback()
+      });
+    });
   });
 
   gulp.task('zipload', function(callback) {
