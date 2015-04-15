@@ -54,7 +54,7 @@ module.exports = function(gulp) {
       throw err;
     }
 
-    AWS.config.region = config.region;
+    AWS.config.region = config.Region;
     var lambda = new AWS.Lambda();
 
     var params = {
@@ -67,8 +67,8 @@ module.exports = function(gulp) {
       Timeout: config.Timeout
     };
 
-    return fs.readFile('./dist.zip', function(err, data) {
-      params.Code.ZipFile = data;
+    return fs.readFile('./dist.zip', function(err, zip) {
+      params.Code = { ZipFile: zip };
       lambda.createFunction(params, function(err, data) {
         if (err) {
           //check for error code, if function exists, try to upload
