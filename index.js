@@ -83,7 +83,7 @@ module.exports = function(gulp) {
             if(err) {
               var warning = 'Fail while Updating Function Configuration'
               gutil.log(warning);
-              //TODO: think about trying to update the code anyway
+              //TODO: think about trying to update the code even if the config fails
               callback(err);
             } else {
               console.log("Successful function configuration update.");
