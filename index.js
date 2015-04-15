@@ -70,8 +70,8 @@ module.exports = function(gulp) {
     return fs.readFile('./dist.zip', function(err, zip) {
       params.Code = { ZipFile: zip };
       lambda.createFunction(params, function(err, data) {
-        if (err.statusCode == 409) {//function already exists
-          console.log(err);
+        if (err && err.statusCode == 409) {//function already exists
+          console.log("Function already exists, updating....");
           lambda.updateFunctionConfiguration({
             FunctionName: params.FunctionName,
             Description: params.Description,
