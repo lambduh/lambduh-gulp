@@ -45,6 +45,7 @@ module.exports = {
   Description: 'descrip',
   Handler: 'index.handler',
   Role: 'arn:aws:iam:etcetc',
+  Region: 'us-east-1',
   Runtime: 'nodejs',
   MemorySize: 320,
   Timeout: 60
