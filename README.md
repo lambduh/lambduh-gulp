@@ -36,7 +36,7 @@ The task you'll use the most – runs `gulp lambda-zip`, then `gulp upload`. See
 
 - Creates and uploads a new Lambda function. If one exists, this will update the function's configuration, then re-upload the latest code. 
 
-This function assumes you have a local `./lambda-config.js` file with details on your lambda function. The parameters match those used by the JS aws-sdk (at the time of writing this):
+This function assumes you have a local `./lambda-config.js` file with details on your lambda function. The parameters match those used by the (current) [JS aws-sdk](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Lambda.html):
 
 ```
 //lambda-config.js
@@ -51,7 +51,20 @@ module.exports = {
 }
 ```
 
-Uploading also assumes your have permissions to update lambda functions from your machine. This takes time to configure via the [AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html), but the resulting workflow is well worth it in my experience. And besides, AWS's interface is much easier to use from the commandline relative to the non-sense they present in the console.
+Uploading also assumes your have permissions to update lambda functions from your machine. This takes time to configure via the [AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html), but the resulting workflow is worth it. And besides, AWS's interface is much easier to use from the commandline relative to the non-sense they present in the console.
+
+## Other gulp tasks
+
+Note that if you're not careful, you may overwrite some of the gulp tasks this module uses. If any of these are silly (i.e. this module shouldn't own the namespace), let me know and I can prefix all of them:
+
+- `clean`
+- `js`
+- `bin`
+- `node-mods`
+- `zip`
+- `lambda-zip`
+- `upload`
+- `zipload`
 
 # Reach out!
 
