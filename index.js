@@ -72,7 +72,14 @@ module.exports = function(gulp) {
       lambda.createFunction(params, function(err, data) {
         if (err.statusCode == 409) {//function already exists
           console.log(err);
-          lambda.updateFunctionConfiguration(params, function(err, data){
+          lambda.updateFunctionConfiguration({
+            FunctionName: params.FunctionName,
+            Description: params.Description,
+            Handler: params.Handler,
+            MemorySize: params.MemorySize,
+            Role: params.Role,
+            Timeout: params.Timeout
+          }, function(err, data){
             if(err) {
               var warning = 'Fail while Updating Function Configuration'
               gutil.log(warning);
