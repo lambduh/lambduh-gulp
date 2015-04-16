@@ -1,6 +1,8 @@
 # lambduh-gulp
 A handful of gulp commands typical to building AWS Lambda functions
 
+Much of this was inspired/borrowed from [Adam Neary's  post here](https://medium.com/@AdamRNeary/a-gulp-workflow-for-amazon-lambda-61c2afd723b6).
+
 # Usage
 
 ```
