@@ -9,6 +9,7 @@ var fs = require('fs');
 module.exports = function(gulp) {
   if (!gulp) {
     gulp = require('gulp');
+    runSequence.use(gulp);
   }
 
   gulp.task('clean', function(cb) {
@@ -81,7 +82,7 @@ module.exports = function(gulp) {
             Timeout: params.Timeout
           }, function(err, data){
             if(err) {
-              var warning = 'Fail while Updating Function Configuration'
+              var warning = 'Fail while Updating Function Configuration';
               gutil.log(warning);
               //TODO: think about trying to update the code even if the config fails
               callback(err);
@@ -92,23 +93,23 @@ module.exports = function(gulp) {
                 ZipFile: params.Code.ZipFile
               }, function(err, data) {
                 if(err) {
-                  var warning = 'Fail while Updating Function Code'
+                  var warning = 'Fail while Updating Function Code';
                   gutil.log(warning);
                   callback(err);
                 } else {
                   console.log("Successful function upload");
                   callback();
                 }
-              })
+              });
             }
-          })
+          });
         } else if(err) {
-          var warning = 'Fail while Creating Lambda Function'
+          var warning = 'Fail while Creating Lambda Function';
           gutil.log(warning);
-          callback(err)
+          callback(err);
         } else {
           console.log('Successfully created new lambda function');
-          callback()
+          callback();
         }
       });
     });
@@ -121,5 +122,5 @@ module.exports = function(gulp) {
       callback
     );
   });
-}
+};
 
