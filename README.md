@@ -1,6 +1,8 @@
 # lambduh-gulp
 A handful of gulp commands typical to building AWS Lambda functions
 
+Much of this was inspired/borrowed from [Adam Neary's  post here](https://medium.com/@AdamRNeary/a-gulp-workflow-for-amazon-lambda-61c2afd723b6).
+
 # Usage
 
 ```
@@ -45,6 +47,7 @@ module.exports = {
   Description: 'descrip',
   Handler: 'index.handler',
   Role: 'arn:aws:iam:etcetc',
+  Region: 'us-east-1',
   Runtime: 'nodejs',
   MemorySize: 320,
   Timeout: 60
