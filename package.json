@@ -6,11 +6,13 @@
   "dependencies": {
     "aws-sdk": "^2.1.23",
     "del": "^1.1.1",
-    "gulp": "^3.8.11",
     "gulp-install": "^0.4.0",
     "gulp-util": "^3.0.4",
     "gulp-zip": "^3.0.2",
     "run-sequence": "^1.0.2"
+  },
+  "peerDependencies": {
+    "gulp": "^3.8.11"
   },
   "devDependencies": {},
   "scripts": {
