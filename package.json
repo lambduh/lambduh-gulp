@@ -1,6 +1,6 @@
 {
   "name": "lambduh-gulp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Adds zip and upload gulp tasks for a streamlined AWS Lambda workflow",
   "main": "index.js",
   "dependencies": {
