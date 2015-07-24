@@ -6,10 +6,14 @@ var runSequence = require('run-sequence');
 var AWS = require('aws-sdk');
 var fs = require('fs');
 
-module.exports = function(gulp) {
+module.exports = function(gulp, opts) {
   if (!gulp) {
     gulp = require('gulp');
     runSequence.use(gulp);
+  }
+
+  if(!opts){
+    opts = {};
   }
 
   gulp.task('clean', function(cb) {
@@ -29,7 +33,7 @@ module.exports = function(gulp) {
   gulp.task('node-mods', function() {
     return gulp.src('./package.json')
       .pipe(gulp.dest('dist/'))
-      .pipe(install({production: true}));
+      .pipe(install({production: true, ignoreScripts: opts.ignoreScripts}));
   });
 
   gulp.task('zip', function() {
