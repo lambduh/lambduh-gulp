@@ -9,6 +9,7 @@
     "gulp-install": "^0.4.0",
     "gulp-util": "^3.0.4",
     "gulp-zip": "^3.0.2",
+    "gulp-rename": "1.2.2",
     "run-sequence": "^1.0.2"
   },
   "peerDependencies": {

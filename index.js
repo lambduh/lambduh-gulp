@@ -4,6 +4,7 @@ var del = require('del');
 var install = require('gulp-install');
 var runSequence = require('run-sequence');
 var AWS = require('aws-sdk');
+var rename = require("gulp-rename");
 var fs = require('fs');
 
 module.exports = function(gulp, opts) {
@@ -34,6 +35,7 @@ module.exports = function(gulp, opts) {
 
   gulp.task('node-mods', function() {
     return gulp.src('./' + packageFile)
+      .pipe(rename('package.json'))
       .pipe(gulp.dest('dist/'))
       .pipe(install({production: true, ignoreScripts: opts.ignoreScripts}));
   });
