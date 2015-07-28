@@ -16,6 +16,8 @@ module.exports = function(gulp, opts) {
     opts = {};
   }
 
+  var packageFile = options.packageFile || 'package.json';
+
   gulp.task('clean', function(cb) {
     del(['./dist', './dist.zip'], cb);
   });
@@ -31,13 +33,13 @@ module.exports = function(gulp, opts) {
   });
 
   gulp.task('node-mods', function() {
-    return gulp.src('./package.json')
+    return gulp.src('./' + packageFile)
       .pipe(gulp.dest('dist/'))
       .pipe(install({production: true, ignoreScripts: opts.ignoreScripts}));
   });
 
   gulp.task('zip', function() {
-    return gulp.src(['dist/**/*', '!dist/package.json'])
+    return gulp.src(['dist/**/*', '!dist/' + packageFile])
       .pipe(zip('dist.zip'))
       .pipe(gulp.dest('./'));
   });
