@@ -16,7 +16,7 @@ module.exports = function(gulp, opts) {
     opts = {};
   }
 
-  var packageFile = options.packageFile || 'package.json';
+  var packageFile = opts.packageFile || 'package.json';
 
   gulp.task('clean', function(cb) {
     del(['./dist', './dist.zip'], cb);
