@@ -21,7 +21,16 @@ module.exports = function(gulp, opts) {
   });
 
   gulp.task('js', function() {
-    return gulp.src('index.js')
+    var config = {};
+
+    try {
+      config = require(process.cwd() + "/lambda-config.js");
+    } catch(err) {
+    }
+
+    var file = config.Handler ? config.Handler.split('.')[0] : 'index';
+
+    return gulp.src(file + '.js')
       .pipe(gulp.dest('dist/'));
   });
 
