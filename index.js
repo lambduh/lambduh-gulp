@@ -30,6 +30,11 @@ module.exports = function(gulp, opts) {
       .pipe(gulp.dest('dist/'));
   });
 
+  gulp.task('lib', function() {
+    return gulp.src('./lib/*')
+      .pipe(gulp.dest('dist/lib/'));
+  });
+
   gulp.task('node-mods', function() {
     return gulp.src('./package.json')
       .pipe(gulp.dest('dist/'))
@@ -45,7 +50,7 @@ module.exports = function(gulp, opts) {
   gulp.task('lambda-zip', function(callback) {
     return runSequence(
       ['clean'],
-      ['js', 'bin', 'node-mods'],
+      ['js', 'lib', 'bin', 'node-mods'],
       ['zip'],
       callback
     );
