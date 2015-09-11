@@ -51,6 +51,14 @@ module.exports = function(gulp, opts) {
     );
   });
 
+  gulp.task('lambda-zip-quick', function(callback) {
+    return runSequence(
+      ['js', 'bin'],
+      ['zip'],
+      callback
+    );
+  });
+
   gulp.task('upload', function(callback) {
     try {
       var config = require(process.cwd() + "/lambda-config.js");
@@ -117,6 +125,14 @@ module.exports = function(gulp, opts) {
         }
       });
     });
+  });
+
+  gulp.task('zipload-quick', function(callback) {
+    return runSequence(
+      ['lambda-zip-quick'],
+      ['upload'],
+      callback
+    );
   });
 
   gulp.task('zipload', function(callback) {
