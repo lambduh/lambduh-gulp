@@ -71,7 +71,7 @@ module.exports = function(gulp, opts) {
 
   gulp.task('lambda-zip-quick', function(callback) {
     return runSequence(
-      ['js', 'bin'],
+      ['js', 'lib', 'bin'],
       ['zip'],
       callback
     );
