@@ -50,7 +50,8 @@ module.exports = {
   Region: 'us-east-1',
   Runtime: 'nodejs',
   MemorySize: 320,
-  Timeout: 60
+  Timeout: 60,
+  Environment: 'production'
 }
 ```
 

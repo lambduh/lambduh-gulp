@@ -13,24 +13,24 @@ module.exports = function(gulp, opts) {
     runSequence.use(gulp);
   }
 
-  if(!opts){
+  if (!opts){
     opts = {};
   }
 
+  var config = {};
+
+  try {
+    config = require(process.cwd() + "/lambda-config.js");
+  } catch(err) {}
+
   var packageFile = opts.packageFile || 'package.json';
+  var environment = config.Environment || process.env.NODE_ENV || opts.environment || ''
 
   gulp.task('clean', function(cb) {
     del(['./dist', './dist.zip'], cb);
   });
 
   gulp.task('js', function() {
-    var config = {};
-
-    try {
-      config = require(process.cwd() + "/lambda-config.js");
-    } catch(err) {
-    }
-
     var file = config.Handler ? config.Handler.split('.')[0] : 'index';
 
     return gulp.src(file + '.js')
@@ -39,6 +39,17 @@ module.exports = function(gulp, opts) {
 
   gulp.task('bin', function() {
     return gulp.src('./bin/*')
+      .pipe(gulp.dest('dist/'));
+  });
+
+  gulp.task('env', function() {
+    var env = '.env';
+    if (environment) {
+      env += '.' + environment;
+    }
+
+    return gulp.src('./' + env)
+      .pipe(rename('.env'))
       .pipe(gulp.dest('dist/'));
   });
 
@@ -63,7 +74,7 @@ module.exports = function(gulp, opts) {
   gulp.task('lambda-zip', function(callback) {
     return runSequence(
       ['clean'],
-      ['js', 'lib', 'bin', 'node-mods'],
+      ['js', 'lib', 'bin', 'node-mods', 'env'],
       ['zip'],
       callback
     );
@@ -71,7 +82,7 @@ module.exports = function(gulp, opts) {
 
   gulp.task('lambda-zip-quick', function(callback) {
     return runSequence(
-      ['js', 'lib', 'bin'],
+      ['js', 'lib', 'bin', 'env'],
       ['zip'],
       callback
     );
