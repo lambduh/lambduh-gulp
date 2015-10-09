@@ -66,7 +66,7 @@ module.exports = function(gulp, opts) {
   });
 
   gulp.task('zip', function() {
-    return gulp.src(['dist/**/*', '!dist/' + packageFile])
+    return gulp.src(['dist/**/*','dist/.env','!dist/' + packageFile])
       .pipe(zip('dist.zip'))
       .pipe(gulp.dest('./'));
   });
