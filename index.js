@@ -17,7 +17,7 @@ module.exports = function(gulp, opts) {
     opts = {};
   }
 
-  if (!opts.config) {
+  if (!opts.configFile) {
       opts.configFile = 'lambda-config.js';
   }
 
