@@ -17,10 +17,14 @@ module.exports = function(gulp, opts) {
     opts = {};
   }
 
+  if (!opts.config) {
+      opts.configFile = 'lambda-config.js';
+  }
+
   var config = {};
 
   try {
-    config = require(process.cwd() + "/lambda-config.js");
+    config = require(process.cwd() + "/" + opts.configFile);
   } catch(err) {}
 
   var packageFile = opts.packageFile || 'package.json';
@@ -172,4 +176,3 @@ module.exports = function(gulp, opts) {
     );
   });
 };
-
