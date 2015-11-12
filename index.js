@@ -17,10 +17,14 @@ module.exports = function(gulp, opts) {
     opts = {};
   }
 
+  if (!opts.configFile) {
+      opts.configFile = 'lambda-config.js';
+  }
+
   var config = {};
 
   try {
-    config = require(process.cwd() + "/lambda-config.js");
+    config = require(process.cwd() + "/" + opts.configFile);
   } catch(err) {}
 
   var packageFile = opts.packageFile || 'package.json';
@@ -90,7 +94,7 @@ module.exports = function(gulp, opts) {
 
   gulp.task('upload', function(callback) {
     try {
-      var config = require(process.cwd() + "/lambda-config.js");
+      var config = require(process.cwd() + "/" + opts.configFile);
     } catch(err) {
       gutil.log("lambduh-gulp upload requires a ./lambda-config.js file to return a js object");
       throw err;
@@ -172,4 +176,3 @@ module.exports = function(gulp, opts) {
     );
   });
 };
-
