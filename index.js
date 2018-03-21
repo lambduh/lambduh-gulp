@@ -58,7 +58,7 @@ module.exports = function(gulp, opts) {
   });
 
   gulp.task('lib', function() {
-    return gulp.src('./lib/*')
+    return gulp.src('./lib/**/*')
       .pipe(gulp.dest('dist/lib/'));
   });
 
